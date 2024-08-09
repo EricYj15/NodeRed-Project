@@ -1,0 +1,150 @@
+[
+    {
+        "id": "5a0422ea20bfe89a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "91004512b8857604",
+        "type": "inject",
+        "z": "5a0422ea20bfe89a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Paulo",
+        "payloadType": "str",
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "f72a3f1db7630f5f"
+            ]
+        ]
+    },
+    {
+        "id": "aed917276d1573f3",
+        "type": "debug",
+        "z": "5a0422ea20bfe89a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f72a3f1db7630f5f",
+        "type": "http request",
+        "z": "5a0422ea20bfe89a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=-23.5325&lon=-46.7917&appid=a669c7581a465a7a7c6ca5cea61e378f&units=metric",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "50acdaebade22432"
+            ]
+        ]
+    },
+    {
+        "id": "50acdaebade22432",
+        "type": "json",
+        "z": "5a0422ea20bfe89a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 390,
+        "y": 260,
+        "wires": [
+            [
+                "b6608bbfba2c5263"
+            ]
+        ]
+    },
+    {
+        "id": "b6608bbfba2c5263",
+        "type": "function",
+        "z": "5a0422ea20bfe89a",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.main.temp\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "aed917276d1573f3",
+                "2667381a5ed08aac"
+            ]
+        ]
+    },
+    {
+        "id": "2667381a5ed08aac",
+        "type": "ui_gauge",
+        "z": "5a0422ea20bfe89a",
+        "name": "",
+        "group": "fc1e0e3355749706",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temp",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "fc1e0e3355749706",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    }
+]
